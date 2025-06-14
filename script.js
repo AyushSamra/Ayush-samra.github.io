@@ -146,4 +146,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Floating buttons animation
+document.addEventListener('DOMContentLoaded', function() {
+    const floatingButtons = document.querySelectorAll('.floating-button');
+    
+    floatingButtons.forEach(button => {
+        // Initial animation
+        setTimeout(() => {
+            button.style.transform = 'translateY(0)';
+        }, 1000);
+        
+        // Click animation
+        button.addEventListener('click', function() {
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 300);
+        });
+    });
+});
 
