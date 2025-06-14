@@ -621,14 +621,17 @@ header {
 }
 /* Floating Contact Buttons with Larger Icons */
 /* Floating Contact Buttons - Extra Large */
+/* Floating Contact Buttons - Fixed for All Devices */
 .floating-contact-buttons {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    z-index: 999;
+    gap: 15px;
+    z-index: 9999; /* Higher z-index to ensure visibility */
+    -webkit-transform: translateZ(0); /* Fix for Samsung devices */
+    transform: translateZ(0);
 }
 
 .floating-button {
@@ -636,81 +639,92 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90px;  /* Very large size */
-    height: 90px; /* Very large size */
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     color: white;
-    font-size: 42px; /* Extra large icon */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    font-size: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
 }
 
-.floating-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+/* Samsung-specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .floating-contact-buttons {
+        position: -webkit-sticky;
+        position: sticky;
+        bottom: 0;
+        right: 0;
+        margin: 20px;
+    }
 }
 
+/* Tooltip adjustments */
+.tooltip {
+    position: absolute;
+    right: 80px;
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Button colors and hover effects */
 .floating-button.whatsapp {
-    background-color: #25D366;
     background: linear-gradient(135deg, #25D366, #128C7E);
 }
 
 .floating-button.phone {
-    background-color: #e74c3c;
     background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
-.tooltip {
-    position: absolute;
-    right: 100px;
-    background: #333;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-.floating-button:hover .tooltip {
+.floating-button:hover .tooltip,
+.floating-button:focus .tooltip {
     opacity: 1;
-    right: 105px;
 }
 
-/* Responsive adjustments */
+/* Mobile-specific adjustments */
 @media (max-width: 768px) {
     .floating-contact-buttons {
-        bottom: 25px;
-        right: 25px;
-        gap: 15px;
+        bottom: 15px;
+        right: 15px;
     }
     
     .floating-button {
-        width: 75px;
-        height: 75px;
-        font-size: 36px;
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
     }
     
     .tooltip {
-        display: none;
+        display: none; /* Hide tooltips on mobile */
     }
-}
-
-/* Animation for attention */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.floating-button {
-    animation: pulse 2s infinite;
-}
-
-.floating-button:hover {
-    animation: none;
+    
+    /* Add text labels for mobile */
+    .floating-button::after {
+        content: attr(data-label);
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 12px;
+        white-space: nowrap;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    .whatsapp::after {
+        content: "WhatsApp";
+    }
+    
+    .phone::after {
+        content: "Call Us";
+    }
 }
