@@ -165,4 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// Force repaint for Samsung devices
+document.addEventListener('scroll', function() {
+    const buttons = document.querySelector('.floating-contact-buttons');
+    buttons.style.transform = 'translateZ(0)';
+});
 
