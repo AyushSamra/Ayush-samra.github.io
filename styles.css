@@ -619,3 +619,98 @@ header {
         margin-top: 160px;
     }
 }
+/* Floating Contact Buttons with Larger Icons */
+/* Floating Contact Buttons - Extra Large */
+.floating-contact-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 999;
+}
+
+.floating-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;  /* Very large size */
+    height: 90px; /* Very large size */
+    border-radius: 50%;
+    color: white;
+    font-size: 42px; /* Extra large icon */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.floating-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.floating-button.whatsapp {
+    background-color: #25D366;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.floating-button.phone {
+    background-color: #e74c3c;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.tooltip {
+    position: absolute;
+    right: 100px;
+    background: #333;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.floating-button:hover .tooltip {
+    opacity: 1;
+    right: 105px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-contact-buttons {
+        bottom: 25px;
+        right: 25px;
+        gap: 15px;
+    }
+    
+    .floating-button {
+        width: 75px;
+        height: 75px;
+        font-size: 36px;
+    }
+    
+    .tooltip {
+        display: none;
+    }
+}
+
+/* Animation for attention */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.floating-button {
+    animation: pulse 2s infinite;
+}
+
+.floating-button:hover {
+    animation: none;
+}
